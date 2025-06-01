@@ -9,6 +9,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import WysiwygEditor from "@/components/WysiwygEditor";
 import ThemeToggle from "@/components/ThemeToggle";
+import { getCsrfToken } from "@/utils/getCsrfToken";
+import { useEffect } from "react";
 
 const CreateMagazine = () => {
   const navigate = useNavigate();
@@ -20,11 +22,59 @@ const CreateMagazine = () => {
   const [coverImage, setCoverImage] = useState("");
   const [isPreviewMode, setIsPreviewMode] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  // CSRF token state
+  const [csrfToken, setCsrfToken] = useState<string>("");
+
+  // 1) On mount, fetch CSRF token
+  useEffect(() => {
+    fetch(`${__API_URL__}/csrf/`, {
+      credentials: "include",
+    })
+      .then((res) => {
+        if (!res.ok) throw new Error("Failed to fetch CSRF token");
+        return res.json();
+      })
+      .then((data) => setCsrfToken(data.csrfToken))
+      .catch((err) => console.error(err));
+  }, []);
+
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!csrfToken) {
+      console.error("No CSRF token available");
+      return;
+    }
+
+    const payload = {
+      title, 
+      about: excerpt,
+      content,
+      author,
+      category,
+      cover_image: coverImage,
+      date: new Date().toISOString()
+    };
+
+    const res = await fetch(`${__API_URL__}/magazine/create`, {
+      method: 'POST',
+      credentials: 'include',            // ensure cookies go
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRFToken': csrfToken,  // Django expects this header
+      },
+      body: JSON.stringify(payload),
+    });
+
+    if (!res.ok) {
+      const err = await res.json();
+      throw new Error(JSON.stringify(err));
+    }
+
     // Here you would normally save the magazine
-    console.log("Magazine created:", { title, excerpt, author, category, content, coverImage });
-    navigate("/");
+    const data = await res.json();
+    console.log("Magazine created:", data);
+    navigate(`${__BASE_URL__}`);
   };
 
   return (
@@ -89,7 +139,7 @@ const CreateMagazine = () => {
               <CardContent className="p-8">
                 {excerpt && (
                   <div className="mb-8 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Excerpt</h3>
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">About</h3>
                     <div 
                       className="prose dark:prose-invert max-w-none text-gray-700 dark:text-gray-300"
                       dangerouslySetInnerHTML={{ __html: excerpt }}
@@ -126,7 +176,7 @@ const CreateMagazine = () => {
                 </div>
 
                 <div>
-                  <Label htmlFor="excerpt" className="text-gray-700 dark:text-gray-300">Excerpt</Label>
+                  <Label htmlFor="excerpt" className="text-gray-700 dark:text-gray-300">About</Label>
                   <WysiwygEditor
                     value={excerpt}
                     onChange={setExcerpt}
@@ -136,7 +186,7 @@ const CreateMagazine = () => {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <Label htmlFor="author" className="text-gray-700 dark:text-gray-300">Author</Label>
+                    <Label htmlFor="author" className="text-gray-700 dark:text-gray-300">Author username</Label>
                     <Input
                       id="author"
                       value={author}
@@ -154,9 +204,9 @@ const CreateMagazine = () => {
                         <SelectValue placeholder="Select category" />
                       </SelectTrigger>
                       <SelectContent className="dark:bg-gray-700 dark:border-gray-600">
-                        <SelectItem value="ART">Art</SelectItem>
-                        <SelectItem value="CULTURE">Culture</SelectItem>
-                        <SelectItem value="PHOTOGRAPHY">Photography</SelectItem>
+                        <SelectItem value="Art">Art</SelectItem>
+                        <SelectItem value="Culture">Culture</SelectItem>
+                        <SelectItem value="Photography">Photography</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
