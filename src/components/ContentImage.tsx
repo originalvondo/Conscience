@@ -45,7 +45,7 @@ const ContentImage = ({ src, alt, alignment, caption, className }: ContentImageP
       />
       {caption && (
         <figcaption className={cn(
-          "text-sm text-gray-500 mt-2 italic",
+          "text-sm text-gray-500 dark:text-gray-400 mt-2 italic",
           getCaptionClasses()
         )}>
           {caption}

@@ -21,8 +21,8 @@ const App = () => (
         <Routes>
           <Route path={`${__BASE_URL__}`} element={<Index />} />
           <Route path={`${__BASE_URL__}/magazine/:slug`} element={<MagazinePage />} />
-          <Route path={`${__BASE_URL__}/Conscience/create`} element={<CreateMagazine />} />
-          <Route path={`${__BASE_URL__}/Conscience/auth`} element={<AuthPage />} />
+          <Route path={`${__BASE_URL__}/magazine/create`} element={<CreateMagazine />} />
+          <Route path={`${__BASE_URL__}/auth`} element={<AuthPage />} />
           <Route path={`${__BASE_URL__}/author/:username`} element={<AuthorPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

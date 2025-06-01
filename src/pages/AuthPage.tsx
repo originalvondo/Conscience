@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import ThemeToggle from "@/components/ThemeToggle";
 
 const AuthPage = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -28,21 +29,26 @@ const AuthPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
+        {/* Theme Toggle */}
+        <div className="flex justify-end">
+          <ThemeToggle />
+        </div>
+
         {/* Header */}
         <div className="text-center">
-          <Link to="/" className="text-3xl font-bold tracking-tight text-gray-900">
+          <Link to={`${__BASE_URL__}`} className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white">
             CONSCIENCE
           </Link>
-          <h2 className="mt-6 text-3xl font-bold text-gray-900">
+          <h2 className="mt-6 text-3xl font-bold text-gray-900 dark:text-white">
             {isLogin ? "Sign in to your account" : "Create your account"}
           </h2>
-          <p className="mt-2 text-sm text-gray-600">
+          <p className="mt-2 text-sm text-gray-600 dark:text-gray:400">
             {isLogin ? "Don't have an account? " : "Already have an account? "}
             <button
               onClick={() => setIsLogin(!isLogin)}
-              className="font-medium text-gray-900 hover:text-gray-600 transition-colors"
+              className="font-medium text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
             >
               {isLogin ? "Sign up" : "Sign in"}
             </button>
@@ -50,7 +56,7 @@ const AuthPage = () => {
         </div>
 
         {/* Form */}
-        <Card className="animate-fade-in">
+        <Card className="animate-fade-in dark:bg-gray-800 dark:border-gray-700">
           <CardHeader>
             <CardTitle>{isLogin ? "Welcome back" : "Get started"}</CardTitle>
             <CardDescription>
@@ -131,7 +137,7 @@ const AuthPage = () => {
 
         {/* Back to home */}
         <div className="text-center">
-          <Link to="/" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
+          <Link to={`${__BASE_URL__}`} className="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors">
             ← Back to homepage
           </Link>
         </div>

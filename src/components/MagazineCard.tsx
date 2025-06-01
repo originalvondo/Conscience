@@ -24,7 +24,7 @@ interface MagazineCardProps {
 const MagazineCard = ({ magazine, index }: MagazineCardProps) => {
   return (
     <article 
-      className="bg-white rounded-lg overflow-hidden hover:shadow-lg transition-all duration-300 hover:-translate-y-1 animate-fade-in group"
+      className="bg-white dark:bg-gray-800 rounded-lg overflow-hidden hover:shadow-lg transition-all duration-300 hover:-translate-y-1 animate-fade-in group"
       style={{ animationDelay: `${index * 0.1}s` }}
     >
       <div className="relative">
@@ -41,25 +41,25 @@ const MagazineCard = ({ magazine, index }: MagazineCardProps) => {
       </div>
       
       <div className="p-6">
-        <div className="flex items-center text-sm text-gray-500 mb-3">
+        <div className="flex items-center text-sm text-gray-500 dark:text-gray-400 mb-3">
           <span>{magazine.date}</span>
         </div>
         
         <Link to={`${__BASE_URL__}/magazine/${magazine.slug}/`}>
-          <h2 className="text-xl font-bold mb-3 hover:text-gray-600 transition-colors cursor-pointer">
+          <h2 className="text-xl font-bold mb-3 hover:text-gray-600 dark:hover:text-gray-300 transition-colors cursor-pointer dark:text-white">
             {magazine.title}
           </h2>
         </Link>
         
-        <p className="text-gray-600 mb-4 text-sm leading-relaxed">
-          {magazine.content}
+        <p className="text-gray-600 dark:text-gray-300 mb-4 text-sm leading-relaxed">
+          { magazine.about }
         </p>
         
         <div className="flex items-center">
-          <span className="text-sm text-gray-500">By </span>
+          <span className="text-sm text-gray-500 dark:text-gray-400">By </span>
           <Link 
             to={`${__BASE_URL__}/author/${magazine.author.toLowerCase().replace(' ', '-')}`}
-            className="text-sm font-medium text-gray-900 ml-1 hover:text-gray-600 transition-colors"
+            className="text-sm font-medium text-gray-900 dark:text-white ml-1 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
           >
             {magazine.author}
           </Link>
