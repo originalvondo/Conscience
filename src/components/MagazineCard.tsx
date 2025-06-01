@@ -51,10 +51,8 @@ const MagazineCard = ({ magazine, index }: MagazineCardProps) => {
           </h2>
         </Link>
         
-        <p className="text-gray-600 dark:text-gray-300 mb-4 text-sm leading-relaxed">
-          { magazine.about }
-        </p>
-        
+        <p dangerouslySetInnerHTML={{ __html: magazine.about }} className="text-gray-600 dark:text-gray-300 mb-4 text-sm leading-relaxed" />
+                
         <div className="flex items-center">
           <span className="text-sm text-gray-500 dark:text-gray-400">By </span>
           <Link 

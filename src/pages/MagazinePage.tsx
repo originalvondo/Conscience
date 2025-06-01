@@ -118,10 +118,7 @@ const MagazinePage = () => {
 
         {/* Article Content */}
         <div className="prose prose-lg max-w-none animate-fade-in dark:prose-invert" style={{ animationDelay: '0.4s' }}>
-          <p className="text-xl text-gray-600 dark:text-gray-300 leading-relaxed mb-8">
-            {magazine.about}
-          </p>
-          {/* Additional content here */}
+          <p dangerouslySetInnerHTML={{ __html: magazine.about }} className="text-xl text-gray-600 dark:text-gray-300 leading-relaxed mb-8" />       
           <div dangerouslySetInnerHTML={{ __html: magazine.content }} />
         </div>
 
