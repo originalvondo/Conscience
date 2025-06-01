@@ -112,13 +112,10 @@ const WysiwygEditor = ({ value, onChange, className }: WysiwygEditorProps) => {
   };
 
   const handleImageWithText = (side: "left" | "right") => {
-    const floatClass = side === "left" ? "float-left mr-6 mb-4 max-w-sm" : "float-right ml-6 mb-4 max-w-sm";
-    const textHtml = `<div class="flex flex-col md:flex-row gap-6 mb-8">
-  <img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=400&h=300&fit=crop" alt="Content image" class="w-full rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 ${floatClass} md:w-1/2" />
-    <p class="flex-1">Your text content goes here. This creates a nice layout with image on the ${side} and text flowing around it.</p>
-</div>
-
-`;
+    const textHtml = `<div class="flex flex-col md:flex-row gap-6 mb-12">
+  <img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=400&h=300&fit=crop" alt="Content image" class="rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 md:w-1/2 mb-2 max-w-sm ${side === 'left' ? "md:order-1 md:mr-auto" : "md:order-2 md:ml-auto"}" />
+    <p class="flex-1 md:order-1 md:self-center">Your text content goes here. This creates a nice layout with image on the ${side} and text flowing around it.</p>
+  </div>`;
     insertAtCursor(textHtml);
   };
 
