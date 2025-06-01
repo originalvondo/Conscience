@@ -58,7 +58,7 @@ const CreateMagazine = () => {
 
     const res = await fetch(`${__API_URL__}/magazine/create`, {
       method: 'POST',
-      credentials: 'include',            // ensure cookies go
+      credentials: 'include',     
       headers: {
         'Content-Type': 'application/json',
         'X-CSRFToken': csrfToken,  // Django expects this header
