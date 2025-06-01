@@ -18,7 +18,7 @@ const AuthorPage = () => {
         setLoading(true);
         setError(null);
 
-        const apiUrl = `http://conscience.pythonanywhere.com/author/${username}/`;
+        const apiUrl = `https://conscience.pythonanywhere.com/author/${username}/`;
         const authorResponse = await fetch(apiUrl);
         const authorJSON = await authorResponse.json();
         const author = authorJSON.author
@@ -27,7 +27,7 @@ const AuthorPage = () => {
           throw new Error("Author not found");
         }
 
-        const magazinesResponse = await fetch(`http://conscience.pythonanywhere.com/author/${username}/publications`);
+        const magazinesResponse = await fetch(`https://conscience.pythonanywhere.com/author/${username}/publications`);
         const magazines = await magazinesResponse.json();
 
         setAuthorData(author);

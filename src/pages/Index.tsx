@@ -13,7 +13,7 @@ const Index = () => {
   const [magazines, setMagazines] = useState([]);
   
   useEffect(() => {
-    const apiUrl = "http://conscience.pythonanywhere.com/magazines/";
+    const apiUrl = "https://conscience.pythonanywhere.com/magazines/";
   
     const fetchMagazines = async () => {
       try {

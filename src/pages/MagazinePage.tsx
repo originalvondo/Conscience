@@ -6,7 +6,7 @@ import ContentImage from "@/components/ContentImage";
 import { useState, useEffect } from "react";
 
 const fetchMagazineBySlug = async (slug) => {
-  const apiUrl = `http://conscience.pythonanywhere.com/magazine/${slug}/`;
+  const apiUrl = `https://conscience.pythonanywhere.com/magazine/${slug}/`;
   try {
     const response = await fetch(apiUrl);
     if (!response.ok) {
