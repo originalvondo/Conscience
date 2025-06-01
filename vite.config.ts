@@ -11,7 +11,7 @@ export default defineConfig(({ mode }) => ({
   plugins: [
     react()
   ].filter(Boolean),
-  base: 'https://originalvondo.github.io/Conscience/',
+  base: '/',
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
