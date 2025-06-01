@@ -19,11 +19,11 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Routes>
-          <Route path="/Conscience/" element={<Index />} />
-          <Route path="/magazine/:slug" element={<MagazinePage />} />
-          <Route path="/create" element={<CreateMagazine />} />
-          <Route path="/auth" element={<AuthPage />} />
-          <Route path="/author/:username" element={<AuthorPage />} />
+          <Route path={`${__BASE_URL__}`} element={<Index />} />
+          <Route path={`${__BASE_URL__}/magazine/:slug`} element={<MagazinePage />} />
+          <Route path={`${__BASE_URL__}/Conscience/create`} element={<CreateMagazine />} />
+          <Route path={`${__BASE_URL__}/Conscience/auth`} element={<AuthPage />} />
+          <Route path={`${__BASE_URL__}/author/:username`} element={<AuthorPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

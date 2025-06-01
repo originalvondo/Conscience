@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Badge } from "@/components/ui/badge";
+import { PassThrough } from "stream";
 
 interface Magazine {
   id: string;
@@ -44,7 +45,7 @@ const MagazineCard = ({ magazine, index }: MagazineCardProps) => {
           <span>{magazine.date}</span>
         </div>
         
-        <Link to={`/magazine/${magazine.slug}/`}>
+        <Link to={`${__BASE_URL__}/magazine/${magazine.slug}/`}>
           <h2 className="text-xl font-bold mb-3 hover:text-gray-600 transition-colors cursor-pointer">
             {magazine.title}
           </h2>
@@ -57,7 +58,7 @@ const MagazineCard = ({ magazine, index }: MagazineCardProps) => {
         <div className="flex items-center">
           <span className="text-sm text-gray-500">By </span>
           <Link 
-            to={`/author/${magazine.author.toLowerCase().replace(' ', '-')}`}
+            to={`${__BASE_URL__}/author/${magazine.author.toLowerCase().replace(' ', '-')}`}
             className="text-sm font-medium text-gray-900 ml-1 hover:text-gray-600 transition-colors"
           >
             {magazine.author}

@@ -11,10 +11,13 @@ export default defineConfig(({ mode }) => ({
   plugins: [
     react()
   ].filter(Boolean),
+  define: {
+    __BASE_URL__: JSON.stringify("/Conscience")
+  },
   build: {
     outDir: "docs",
   },
-  base: '/Conscience/',
+  base: '/Conscience',
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),

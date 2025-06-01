@@ -44,7 +44,7 @@ const MagazinePage = () => {
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-2xl font-bold mb-4">{error}</h1>
-          <Link to="/">
+          <Link to={`${__BASE_URL__}`}>
             <Button>Back to Home</Button>
           </Link>
         </div>
@@ -68,11 +68,11 @@ const MagazinePage = () => {
       <header className="bg-white border-b border-gray-200 sticky top-0 z-50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            <Link to="/" className="flex items-center space-x-2 text-gray-600 hover:text-gray-900">
+            <Link to={`${__BASE_URL__}`} className="flex items-center space-x-2 text-gray-600 hover:text-gray-900">
               <ArrowLeft className="h-4 w-4" />
               <span className="font-medium">Back to Home</span>
             </Link>
-            <Link to="/" className="text-xl font-bold tracking-tight">
+            <Link to="/Conscience/" className="text-xl font-bold tracking-tight">
               CONSCIENCE
             </Link>
             <div className="w-24"></div>
@@ -100,7 +100,7 @@ const MagazinePage = () => {
               <User className="h-5 w-5 text-gray-600" />
             </div>
             <div>
-              <p className="font-medium text-gray-900">By <Link to={`/author/${magazine.author.toLowerCase().replace(' ', '-')}`}>{magazine.author}</Link></p>
+              <p className="font-medium text-gray-900">By <Link to={`${__BASE_URL__}/author/${magazine.author.toLowerCase().replace(' ', '-')}`}>{magazine.author}</Link></p>
               <p className="text-sm text-gray-500">Contributing Writer</p>
             </div>
           </div>
@@ -125,7 +125,7 @@ const MagazinePage = () => {
 
         {/* Back to Home */}
         <div className="mt-16 pt-8 border-t border-gray-200">
-          <Link to="/">
+          <Link to={`${__BASE_URL__}`}>
             <Button variant="outline" className="flex items-center space-x-2">
               <ArrowLeft className="h-4 w-4" />
               <span>Back to Magazine</span>

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom"
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Search, User, Menu, X } from "lucide-react";
+import { Search, User, Menu, X, Link2 } from "lucide-react";
 import MagazineCard from "@/components/MagazineCard";
 
 const Index = () => {
@@ -49,15 +49,18 @@ const Index = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
-            <a href="#" className="text-2xl font-bold tracking-tight">
+            <a href="/" className="text-2xl font-bold tracking-tight">
               CONSCIENCE
             </a>
 
             {/* Desktop Navigation */}
             <nav className="hidden md:flex items-center space-x-8">
-              <a href="/magazines" className="text-gray-600 hover:text-gray-900 transition-colors">
+              <Link to={`${__BASE_URL__}/magazines`}>
+              <p className="text-gray-600 hover:text-gray-900 transition-colors">
                 Magazines
-              </a>
+              </p>
+              </Link>
+
               <a href="/authors" className="text-gray-600 hover:text-gray-900 transition-colors">
                 Authors
               </a>
@@ -74,7 +77,7 @@ const Index = () => {
                     Logout
                   </Button>
                   <Button size="sm">
-                    <a href="/create">Create</a>
+                    <a href="/Conscience//create">Create</a>
                   </Button>
                 </div>
               ) : (
@@ -105,15 +108,15 @@ const Index = () => {
         {isMenuOpen && (
           <div className="md:hidden bg-white border-t border-gray-200 animate-fade-in">
             <div className="px-4 py-3 space-y-3">
-              <a href="/magazines" className="block text-gray-600 hover:text-gray-900">
+              <Link to={`${__BASE_URL__}/magazines`} className="block text-gray-600 hover:text-gray-900">
                 Magazines
-              </a>
-              <a href="/authors" className="block text-gray-600 hover:text-gray-900">
+              </Link>
+              <Link to={`${__BASE_URL__}/authors`} className="block text-gray-600 hover:text-gray-900">
                 Authors
-              </a>
-              <a href="/podcast" className="block text-gray-600 hover:text-gray-900">
+              </Link>
+              <Link to={`${__BASE_URL__}/podcast`} className="block text-gray-600 hover:text-gray-900">
                 Podcast
-              </a>
+              </Link>
               <div className="pt-3 border-t border-gray-200">
                 {isLoggedIn ? (
                   <div className="space-y-2">
@@ -121,16 +124,16 @@ const Index = () => {
                       Logout
                     </Button>
                     <Button size="sm" className="w-full">
-                      <a href="/create">Create Magazine</a>
+                      <a href={`${__BASE_URL__}/create`}>Create Magazine</a>
                     </Button>
                   </div>
                 ) : (
                   <div className="space-y-2">
                     <Button variant="ghost" size="sm">
-                      <Link to="/auth">Login</Link>
+                      <Link to={`${__BASE_URL__}/auth`}>Login</Link>
                     </Button>
                     <Button size="sm">
-                      <Link to="/auth">Sign Up</Link>
+                      <Link to={`${__BASE_URL__}/auth`}>Sign Up</Link>
                     </Button>
                   </div>
                 )}
@@ -232,7 +235,7 @@ const Index = () => {
           <div className="text-sm text-gray-500">
             <span>Created by </span>
             <a 
-              href="originalvondo.github.io" 
+              href="https://originalvondo.github.io" 
               target="_blank" 
               rel="noopener noreferrer"
               className="text-gray-900 hover:text-gray-600 transition-colors font-medium"
