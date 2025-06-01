@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 import ThemeToggle from "@/components/ThemeToggle";
 
 const fetchMagazineBySlug = async (slug) => {
-  const apiUrl = `${__API_URL__}/magazine/${slug}/`;
+  const apiUrl = `${__API_URL__}/magazines/${slug}/`;
   try {
     const response = await fetch(apiUrl);
     if (!response.ok) {
