@@ -115,8 +115,8 @@ const Index = () => {
               <Link to={`${__BASE_URL__}/authors`} className="block text-gray-600 hover:text-gray-900">
                 Authors
               </Link>
-              <Link to={`${__BASE_URL__}/podcast`} className="block text-gray-600 hover:text-gray-900">
-                Podcast
+              <Link to={`${__BASE_URL__}/magazine/create`} className="block text-gray-600 hover:text-gray-900">
+                Create
               </Link>
               <div className="pt-3 border-t border-gray-200">
                 {isLoggedIn ? (
