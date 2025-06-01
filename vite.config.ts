@@ -11,6 +11,9 @@ export default defineConfig(({ mode }) => ({
   plugins: [
     react()
   ].filter(Boolean),
+  build: {
+    outDir: "docs",
+  },
   base: '/Conscience/',
   resolve: {
     alias: {
