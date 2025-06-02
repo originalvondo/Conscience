@@ -12,6 +12,20 @@ import ThemeToggle from "@/components/ThemeToggle";
 import { getCsrfToken } from "@/utils/getCsrfToken";
 import { useEffect } from "react";
 
+
+const getCategories = async () => {
+  try {
+    const response = await fetch(`${__API_URL__}/categories/`);
+    if (!response.ok) throw new Error("Failed to fetch categories");
+    const data = await response.json();
+    console.log(`received categories: ${data}`);
+    return data;
+  } catch (error) {
+    console.error("Error fetching categories:", error);
+    return [];
+  }
+};
+
 const CreateMagazine = () => {
   const navigate = useNavigate();
   const [title, setTitle] = useState("");
@@ -21,21 +35,30 @@ const CreateMagazine = () => {
   const [content, setContent] = useState("");
   const [coverImage, setCoverImage] = useState("");
   const [isPreviewMode, setIsPreviewMode] = useState(false);
+  const [categories, setCategories] = useState<string[]>([]);
 
   // CSRF token state
   const [csrfToken, setCsrfToken] = useState<string>("");
-
+  
   // 1) On mount, fetch CSRF token
   useEffect(() => {
-    fetch(`${__API_URL__}/csrf/`, {
-      credentials: "include",
-    })
-      .then((res) => {
-        if (!res.ok) throw new Error("Failed to fetch CSRF token");
-        return res.json();
-      })
-      .then((data) => setCsrfToken(data.csrfToken))
-      .catch((err) => console.error(err));
+    const fetchData = async () => {
+      try {
+        const csrfResponse = await fetch(`${__API_URL__}/csrf/`, {
+          credentials: "include",
+        });
+        if (!csrfResponse.ok) throw new Error("Failed to fetch CSRF token");
+        const csrfData = await csrfResponse.json();
+        setCsrfToken(csrfData.csrfToken);
+
+        const categoriesData = await getCategories();
+        setCategories(categoriesData);
+      } catch (error) {
+        console.error("Error in fetching data:", error);
+      }
+    };
+
+    fetchData();
   }, []);
 
 
@@ -204,9 +227,9 @@ const CreateMagazine = () => {
                         <SelectValue placeholder="Select category" />
                       </SelectTrigger>
                       <SelectContent className="dark:bg-gray-700 dark:border-gray-600">
-                        <SelectItem value="Art">Art</SelectItem>
-                        <SelectItem value="Culture">Culture</SelectItem>
-                        <SelectItem value="Photography">Photography</SelectItem>
+                        {categories.map((category, index) => (
+                          <SelectItem key={index} value={category}>{category}</SelectItem>
+                        ))}
                       </SelectContent>
                     </Select>
                   </div>
