@@ -140,7 +140,7 @@ const MagazinePage = () => {
           <img
             src={magazine.coverImage}
             alt={magazine.title}
-            className="w-full h-96 object-cover rounded-lg"
+            className="w-full object-cover rounded-lg"
           />
         </div>
 
