@@ -20,7 +20,7 @@ export default defineConfig(({ mode }) => ({
   build: {
     outDir: "docs",
   },
-  base: '/Conscience/',
+  // base: '/Conscience/',
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
