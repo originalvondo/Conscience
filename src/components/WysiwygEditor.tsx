@@ -93,13 +93,13 @@ const WysiwygEditor = ({ value, onChange, className }: WysiwygEditorProps) => {
 
     const alignmentClass = imageAlignment === "left" ? "float-left mr-6 mb-4 max-w-sm" 
                          : imageAlignment === "right" ? "float-right ml-6 mb-4 max-w-sm"
-                         : "mx-auto block my-8 max-w-2xl";
+                         : "mx-auto block mt-0 mb-0 max-w-2xl";
 
     const captionAlignment = imageAlignment === "left" ? "text-left"
                            : imageAlignment === "right" ? "text-right"
                            : "text-center";
 
-    let imageHtml = `<figure class="animate-fade-in">
+    let imageHtml = `<figure class="animate-fade-in mb-12 mt-12">
   <img src="${imageUrl}" alt="${imageAlt}" class="w-full rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 ${alignmentClass}" />`;
 
     if (imageCaption) {
@@ -120,7 +120,7 @@ const WysiwygEditor = ({ value, onChange, className }: WysiwygEditorProps) => {
   };
 
   const handleImageWithText = (side: "left" | "right") => {
-    const textHtml = `<div class="flex flex-col md:flex-row gap-6 mb-12">\n\t<img \n\t\tsrc="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=400&h=300&fit=crop" \n\t\talt="Content image" \n\t\tclass="rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 md:w-1/2 mb-2 max-w-sm ${side === 'left' ? "md:order-1 md:mr-auto" : "md:order-2 md:ml-auto"}" \n\t/>\n\t<p class="flex-1 md:order-1 md:self-center">\n\t\tYour text content goes here.\n\t</p>\n</div>`;
+    const textHtml = `<div class="flex flex-col md:flex-row gap-6 mb-12 mt-12">\n\t<img \n\t\tsrc="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=400&h=300&fit=crop" \n\t\talt="Content image" \n\t\tclass="rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 md:w-1/2 mb-2 max-w-sm ${side === 'left' ? "md:order-1 md:mr-auto" : "md:order-2 md:ml-auto"}" \n\t/>\n\t<p class="flex-1 md:order-1 md:self-center">\n\t\tYour text content goes here.\n\t</p>\n</div>`;
     insertAtCursor(textHtml);
   };
 

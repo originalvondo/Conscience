@@ -31,7 +31,7 @@ const Index = () => {
 
     fetchMagazines();
 
-    const intervalId = setInterval(fetchMagazines, 60000); // Fetch every 60 seconds
+    const intervalId = setInterval(fetchMagazines, 30000); // Fetch every 30 seconds
 
     return () => clearInterval(intervalId);
   }, []);
