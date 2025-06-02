@@ -14,7 +14,7 @@ export default defineConfig(({ mode }) => ({
   ].filter(Boolean),
   define: {
     // __BASE_URL__: JSON.stringify("/Conscience"),
-    __BASE_URL__: JSON.stringify("/Conscience"),
+    __BASE_URL__: JSON.stringify(""),
     __API_URL__: JSON.stringify("https://conscience.pythonanywhere.com"),
     // __API_URL__: JSON.stringify("http://127.0.0.1:8000"),
   },
