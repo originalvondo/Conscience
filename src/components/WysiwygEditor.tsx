@@ -18,6 +18,11 @@ import {
   Heading3 
 } from "lucide-react";
 
+import Editor from "react-simple-code-editor";
+import Prism from "prismjs";
+import "prismjs/components/prism-markup";
+import "prismjs/themes/prism.css";
+
 interface WysiwygEditorProps {
   value: string;
   onChange: (value: string) => void;
@@ -31,6 +36,9 @@ const WysiwygEditor = ({ value, onChange, className }: WysiwygEditorProps) => {
   const [imageAlt, setImageAlt] = useState("");
   const [imageAlignment, setImageAlignment] = useState<"left" | "center" | "right">("center");
   const [imageCaption, setImageCaption] = useState("");
+
+  // Highlight function for Prism
+  const highlight = (code: string) => Prism.highlight(code, Prism.languages.markup, 'markup');
 
   const insertAtCursor = (text: string) => {
     const textarea = textareaRef.current;
@@ -112,10 +120,7 @@ const WysiwygEditor = ({ value, onChange, className }: WysiwygEditorProps) => {
   };
 
   const handleImageWithText = (side: "left" | "right") => {
-    const textHtml = `<div class="flex flex-col md:flex-row gap-6 mb-12">
-  <img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=400&h=300&fit=crop" alt="Content image" class="rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 md:w-1/2 mb-2 max-w-sm ${side === 'left' ? "md:order-1 md:mr-auto" : "md:order-2 md:ml-auto"}" />
-    <p class="flex-1 md:order-1 md:self-center">Your text content goes here. This creates a nice layout with image on the ${side} and text flowing around it.</p>
-  </div>`;
+    const textHtml = `<div class="flex flex-col md:flex-row gap-6 mb-12">\n\t<img \n\t\tsrc="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=400&h=300&fit=crop" \n\t\talt="Content image" \n\t\tclass="rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 md:w-1/2 mb-2 max-w-sm ${side === 'left' ? "md:order-1 md:mr-auto" : "md:order-2 md:ml-auto"}" \n\t/>\n\t<p class="flex-1 md:order-1 md:self-center">\n\t\tYour text content goes here.\n\t</p>\n</div>`;
     insertAtCursor(textHtml);
   };
 
@@ -301,9 +306,20 @@ const WysiwygEditor = ({ value, onChange, className }: WysiwygEditorProps) => {
         ref={textareaRef}
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="rounded-t-none border-t-0 min-h-[300px] font-mono text-sm"
+        className="rounded-t-none border-t-0 min-h-[500px] font-mono text-sm resize-none"
         placeholder="Write your article content here. Use the toolbar above to format text and insert images..."
       />
+
+      {/* <Editor
+        value={value}
+        onValueChange={onChange}
+        highlight={highlight}
+        padding={10}
+        textareaId="wysiwyg-editor"
+        placeholder="Write your article content here. Use the toolbar above to format text and insert images..."
+        className="rounded-t-none focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none focus-visible:ring-2 rounded-md border placeholder:text-muted-foreground border-input border-t-0 min-h-[300px] font-mono text-sm bg-background resize-none"
+        // style={{ whiteSpace: 'pre-wrap' }}
+      /> */}
     </div>
   );
 };

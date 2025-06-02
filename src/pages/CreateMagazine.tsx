@@ -97,7 +97,7 @@ const CreateMagazine = () => {
     // Here you would normally save the magazine
     const data = await res.json();
     console.log("Magazine created:", data);
-    navigate(`${__BASE_URL__}`);
+    navigate(`${__BASE_URL__}/`);
   };
 
   return (
@@ -106,11 +106,11 @@ const CreateMagazine = () => {
       <header className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 sticky top-0 z-50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            <Link to={`${__BASE_URL__}`} className="flex items-center space-x-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white">
+            <Link to={`${__BASE_URL__}/`} className="flex items-center space-x-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white">
               <ArrowLeft className="h-4 w-4" />
               <span className="font-medium">Back to Home</span>
             </Link>
-            <h1 className="text-xl font-bold tracking-tight text-gray-900 dark:text-white">Create Magazine</h1>
+            <h1 className="text-xl font-bold tracking-tight text-gray-900 dark:text-white">Create Article</h1>
             <div className="flex items-center space-x-2">
               <Button
                 type="button"
@@ -138,7 +138,7 @@ const CreateMagazine = () => {
       </header>
 
       {/* Content */}
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {isPreviewMode ? (
           /* Preview Mode */
           <div className="space-y-8">
@@ -171,7 +171,22 @@ const CreateMagazine = () => {
                 )}
                 
                 <div 
-                  className="prose dark:prose-invert max-w-none text-gray-900 dark:text-white"
+                    className="prose dark:prose-invert max-w-none text-gray-900 dark:text-white
+                    prose-headings:text-gray-900 dark:prose-headings:text-white
+                    prose-h1:text-4xl prose-h1:font-bold prose-h1:mb-6 prose-h1:mt-8 prose-h1:leading-tight
+                    prose-h2:text-3xl prose-h2:font-semibold prose-h2:mb-4 prose-h2:mt-6 prose-h2:leading-tight
+                    prose-h3:text-2xl prose-h3:font-medium prose-h3:mb-3 prose-h3:mt-4 prose-h3:leading-tight
+                    prose-p:text-lg prose-p:leading-relaxed prose-p:mb-4
+                    prose-strong:font-bold prose-strong:text-gray-900 dark:prose-strong:text-white
+                    prose-em:italic prose-em:text-gray-700 dark:prose-em:text-gray-300
+                    prose-code:bg-gray-100 dark:prose-code:bg-gray-800 prose-code:px-2 prose-code:py-1 prose-code:rounded
+                    prose-code:text-sm prose-code:font-mono prose-code:border prose-code:border-gray-200 dark:prose-code:border-gray-700
+                    prose-code:text-red-600 dark:prose-code:text-red-400
+                    prose-code:before:content-none prose-code:after:content-none
+                    prose-pre:bg-gray-900 dark:prose-pre:bg-gray-950 prose-pre:border prose-pre:border-gray-300 dark:prose-pre:border-gray-700
+                    prose-pre:rounded-lg prose-pre:p-6 prose-pre:overflow-x-auto prose-pre:shadow-lg prose-pre:my-6
+                    prose-pre:relative prose-pre:before:content-[''] prose-pre:before:absolute prose-pre:before:top-0 prose-pre:before:left-0 prose-pre:before:right-0 prose-pre:before:h-10 prose-pre:before:bg-gray-800 dark:prose-pre:before:bg-gray-900 prose-pre:before:rounded-t-lg prose-pre:before:border-b prose-pre:before:border-gray-600
+                    prose-img:rounded-lg prose-img:shadow-md prose-img:max-w-full prose-img:h-auto"
                   dangerouslySetInnerHTML={{ __html: content || "<p>Start writing your article content...</p>" }}
                 />
               </CardContent>
@@ -179,7 +194,7 @@ const CreateMagazine = () => {
           </div>
         ) : (
           /* Edit Mode */
-          <form onSubmit={handleSubmit} className="space-y-8">
+          <form onSubmit={handleSubmit} className="space-y-7">
             {/* Basic Information */}
             <Card className="animate-fade-in dark:bg-gray-800 dark:border-gray-700">
               <CardHeader>

@@ -50,7 +50,7 @@ const Index = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
-            <a href={`${__BASE_URL__}`} className="text-2xl font-bold tracking-tight dark:text-white">
+            <a href={`${__BASE_URL__}/`} className="text-2xl font-bold tracking-tight dark:text-white">
               CONSCIENCE
             </a>
 
@@ -84,10 +84,10 @@ const Index = () => {
               ) : (
                 <div className="hidden sm:flex items-center space-x-2">
                   <Button variant="ghost" size="sm">
-                    <Link to={`${__BASE_URL__}/auth`}>Login</Link>
+                    <Link to={`${__BASE_URL__}/`}>Donate to the Project</Link>
                   </Button>
                   <Button size="sm">
-                    <Link to={`${__BASE_URL__}/auth`}>Sign Up</Link>
+                    <Link to={`${__BASE_URL__}/`}>Visit my Website</Link>
                   </Button>
                 </div>
               )}
@@ -131,10 +131,10 @@ const Index = () => {
                 ) : (
                   <div className="space-y-2">
                     <Button variant="ghost" size="sm">
-                      <Link to={`${__BASE_URL__}/auth`}>Login</Link>
+                      <Link to={`${__BASE_URL__}/`}>Donate to the Project</Link>
                     </Button>
                     <Button size="sm">
-                      <Link to={`${__BASE_URL__}/auth`}>Sign Up</Link>
+                      <Link to={`${__BASE_URL__}/`}>Visit my Website</Link>
                     </Button>
                   </div>
                 )}
