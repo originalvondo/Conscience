@@ -70,7 +70,7 @@ const Header = ({ currentPage }: HeaderProps) => {
                     <Link to={`${__BASE_URL__}/donate`}>Donate to the Project</Link>
                   </Button>
                   <Button size="sm">
-                    <Link to={`${__BASE_URL__}/`}>Visit my Website</Link>
+                    <Link to={`${__AUTHOR_WEBSITE__}`}>Visit my Website</Link>
                   </Button>
                 </div>
               )}
@@ -132,7 +132,7 @@ const Header = ({ currentPage }: HeaderProps) => {
                       <Link to={`${__BASE_URL__}/donate`} onClick={() => setIsMenuOpen(false)}>Donate to the Project</Link>
                     </Button>
                     <Button size="sm">
-                      <Link to={`${__BASE_URL__}/`} onClick={() => setIsMenuOpen(false)}>Visit my Website</Link>
+                      <Link to={`${__AUTHOR_WEBSITE__}`} onClick={() => setIsMenuOpen(false)}>Visit my Website</Link>
                     </Button>
                   </div>
                 )}
