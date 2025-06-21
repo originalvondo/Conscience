@@ -12,7 +12,7 @@ import WysiwygEditor from "@/components/WysiwygEditor";
 import ThemeToggle from "@/components/ThemeToggle";
 import { getCsrfToken } from "@/utils/getCsrfToken";
 import { useEffect } from "react";
-
+import { processHtmlContent } from "@/utils/ContentUtils";
 
 const getCategories = async () => {
   try {
@@ -170,8 +170,10 @@ const CreateMagazine = () => {
               {/* Excerpt */}
               {excerpt && (
                 <div className="text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed">
-                  <div dangerouslySetInnerHTML={{ __html: excerpt }} />
-                </div>
+                  <div 
+                      dangerouslySetInnerHTML={{ __html: processHtmlContent(excerpt) }}
+                  />
+                </div>  
               )}
 
               {/* Article Meta */}
@@ -226,7 +228,7 @@ const CreateMagazine = () => {
               prose-ul:my-6 prose-ol:my-6 prose-li:mb-2"
             >
               <div dangerouslySetInnerHTML={{
-                __html: content || `
+                __html: processHtmlContent(content) || `
                   <p>Start writing your article content here. This is where your compelling story will unfold, engaging readers with insightful perspectives and thought-provoking ideas.</p>
                   
                   <p>Each paragraph should flow naturally into the next, creating a cohesive narrative that keeps your audience engaged from start to finish.</p>
