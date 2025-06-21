@@ -10,6 +10,8 @@ import AuthPage from "./pages/AuthPage";
 import AuthorPage from "./pages/AuthorPage";
 import NotFound from "./pages/NotFound";
 import AuthorsPage from "./pages/AuthorsPage";
+import DonatePage from "./pages/DonatePage";
+import MagazinesPage from "./pages/MagazinesPage"
 
 const queryClient = new QueryClient();
 
@@ -22,10 +24,12 @@ const App = () => (
         <Routes>
           <Route path={`${__BASE_URL__}`} element={<Index />} />
           <Route path={`${__BASE_URL__}/authors`} element={<AuthorsPage />} />
+          <Route path={`${__BASE_URL__}/magazines`} element={<MagazinesPage />} />
           <Route path={`${__BASE_URL__}/magazine/:slug`} element={<MagazinePage />} />
           <Route path={`${__BASE_URL__}/magazine/create`} element={<CreateMagazine />} />
           {/* <Route path={`${__BASE_URL__}/auth`} element={<AuthPage />} /> */}
           <Route path={`${__BASE_URL__}/author/:username`} element={<AuthorPage />} />
+          <Route path={`${__BASE_URL__}/donate`} element={<DonatePage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
