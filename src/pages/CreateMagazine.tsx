@@ -12,7 +12,7 @@ import WysiwygEditor from "@/components/WysiwygEditor";
 import ThemeToggle from "@/components/ThemeToggle";
 import { getCsrfToken } from "@/utils/getCsrfToken";
 import { useEffect } from "react";
-import { processHtmlContent } from "@/utils/ContentUtils";
+import { processHtmlContent } from "@/utils/contentUtils";
 
 const getCategories = async () => {
   try {
