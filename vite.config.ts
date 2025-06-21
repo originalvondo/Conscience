@@ -16,6 +16,7 @@ export default defineConfig(({ mode }) => ({
     // __BASE_URL__: JSON.stringify("/Conscience"),
     __BASE_URL__: JSON.stringify(""),
     __API_URL__: JSON.stringify("https://conscience.pythonanywhere.com"),
+    __AUTHOR_WEBSITE__: JSON.stringify("https://originalvondo.github.io/")
     // __API_URL__: JSON.stringify("http://127.0.0.1:8000"),
   },
   build: {
