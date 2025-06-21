@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import ThemeToggle from "@/components/ThemeToggle";
-
 interface HeaderProps {
   currentPage?: string;
 }
@@ -68,7 +67,7 @@ const Header = ({ currentPage }: HeaderProps) => {
               ) : (
                 <div className="hidden md:flex items-center space-x-2">
                   <Button variant="ghost" size="sm">
-                    <Link to={`${__BASE_URL__}/`}>Donate to the Project</Link>
+                    <Link to={`${__BASE_URL__}/donate`}>Donate to the Project</Link>
                   </Button>
                   <Button size="sm">
                     <Link to={`${__BASE_URL__}/`}>Visit my Website</Link>
@@ -130,7 +129,7 @@ const Header = ({ currentPage }: HeaderProps) => {
                 ) : (
                   <div className="space-y-2">
                     <Button variant="ghost" size="sm" className="w-full justify-start">
-                      <Link to={`${__BASE_URL__}/`} onClick={() => setIsMenuOpen(false)}>Donate to the Project</Link>
+                      <Link to={`${__BASE_URL__}/donate`} onClick={() => setIsMenuOpen(false)}>Donate to the Project</Link>
                     </Button>
                     <Button size="sm">
                       <Link to={`${__BASE_URL__}/`} onClick={() => setIsMenuOpen(false)}>Visit my Website</Link>
