@@ -57,7 +57,7 @@ const Index = () => {
     const matchesCategory = selectedCategory === "ALL" || magazine.category === selectedCategory;
     return matchesSearch && matchesCategory;
   });
-  const categories = ["ALL", "Art", "Culture", "Photography", "Thoughts"];
+  const categories = ["ALL", "Technology", "Thoughts"];
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">

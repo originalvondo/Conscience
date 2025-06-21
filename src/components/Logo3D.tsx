@@ -5,7 +5,7 @@ import { useGLTF, OrbitControls } from '@react-three/drei';
 import * as THREE from 'three';
 
 // 3D Model component - can be easily swapped for different models
-function LogoModel({ modelPath = "/models/logo.glb" }: { modelPath?: string }) {
+function LogoModel({ modelPath = "/models/brain.glb" }: { modelPath?: string }) {
   const meshRef = useRef<THREE.Group>(null);
   
   // Load the 3D model (fallback to a simple geometry if model fails to load)
@@ -58,8 +58,8 @@ function LogoFallback() {
 
 const Logo3D = ({ modelPath }: { modelPath?: string }) => {
   return (
-    <div className="w-12 h-8 cursor-pointer">
-      <Canvas camera={{ position: [0, 0, 5], fov: 45 }}>
+    <div className="w-14 h-10 cursor-pointer">
+      <Canvas camera={{ position: [0, 0, 2.6], fov: 45 }}>
         <ambientLight intensity={0.5} />
         <directionalLight position={[10, 10, 5]} intensity={1} />
         <Suspense fallback={null}>
