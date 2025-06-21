@@ -54,8 +54,10 @@ const Header = ({ currentPage }: HeaderProps) => {
             {/* Right Section */}
             <div className="flex items-center space-x-4">
             <ThemeToggle />
+
+              {/* Desktop Auth Buttons */}
               {isLoggedIn ? (
-                <div className="flex items-center space-x-2">
+                <div className="hidden md:flex items-center space-x-2">
                   <Button variant="ghost" size="sm" onClick={() => setIsLoggedIn(false)}>
                     Logout
                   </Button>
@@ -64,7 +66,7 @@ const Header = ({ currentPage }: HeaderProps) => {
                   </Button>
                 </div>
               ) : (
-                <div className="hidden sm:flex items-center space-x-2">
+                <div className="hidden md:flex items-center space-x-2">
                   <Button variant="ghost" size="sm">
                     <Link to={`${__BASE_URL__}/`}>Donate to the Project</Link>
                   </Button>
@@ -91,44 +93,47 @@ const Header = ({ currentPage }: HeaderProps) => {
         {isMenuOpen && (
           <div className="md:hidden bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 animate-fade-in">
             <div className="px-4 py-3 space-y-3">
-              <Link to={`${__BASE_URL__}/magazines`} className={`block ${
-                isActivePage('magazines') 
-                  ? 'text-gray-900 dark:text-white font-medium'
-                  : 'text-gray-600 hover:text-gray-900'
-              }`}>
+              <Link 
+                to={`${__BASE_URL__}/magazines`} 
+                className="block text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >
                 Magazines
               </Link>
-              <Link to={`${__BASE_URL__}/authors`} className={`block ${
-                isActivePage('authors') 
-                  ? 'text-gray-900 dark:text-white font-medium'
-                  : 'text-gray-600 hover:text-gray-900'
-              }`}>
+
+              <Link 
+              to={`${__BASE_URL__}/authors`} 
+                className="block text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >
                 Authors
               </Link>
-              <Link to={`${__BASE_URL__}/magazine/create`} className={`block ${
-                isActivePage('create') 
-                  ? 'text-gray-900 dark:text-white font-medium'
-                  : 'text-gray-600 hover:text-gray-900'
-              }`}>
+              
+              <Link 
+              to={`${__BASE_URL__}/magazine/create`} 
+                className="block text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >
                 Create
               </Link>
-              <div className="pt-3 border-t border-gray-200">
+              
+              <div className="pt-3 border-t border-gray-200 dark:border-gray-700">
                 {isLoggedIn ? (
                   <div className="space-y-2">
-                    <Button variant="ghost" size="sm" className="w-full" onClick={() => setIsLoggedIn(false)}>
+                    <Button variant="ghost" size="sm" className="w-full justify-start" onClick={() => {setIsLoggedIn(false); setIsMenuOpen(false)}}>
                       Logout
                     </Button>
                     <Button size="sm" className="w-full">
-                      <a href={`${__BASE_URL__}/magazine/create`}>Create Magazine</a>
+                      <Link to={`${__BASE_URL__}/magazine/create`} onClick={() => setIsMenuOpen(false)}>Create Magazine</Link>
                     </Button>
                   </div>
                 ) : (
                   <div className="space-y-2">
-                    <Button variant="ghost" size="sm">
-                      <Link to={`${__BASE_URL__}/`}>Donate to the Project</Link>
+                    <Button variant="ghost" size="sm" className="w-full justify-start">
+                      <Link to={`${__BASE_URL__}/`} onClick={() => setIsMenuOpen(false)}>Donate to the Project</Link>
                     </Button>
                     <Button size="sm">
-                      <Link to={`${__BASE_URL__}/`}>Visit my Website</Link>
+                      <Link to={`${__BASE_URL__}/`} onClick={() => setIsMenuOpen(false)}>Visit my Website</Link>
                     </Button>
                   </div>
                 )}
