@@ -11,13 +11,13 @@ import Footer from "@/components/footer";
 const Index = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [searchQuery, setSearchQuery] = useState(""); 
-
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("ALL");
   const [magazines, setMagazines] = useState([]);
-  
+
   useEffect(() => {
     const apiUrl = `${__API_URL__}/magazines/`;
-  
+
     const fetchMagazines = async () => {
       try {
         const response = await fetch(apiUrl);
@@ -39,11 +39,15 @@ const Index = () => {
   }, []);
 
   const featuredMagazines = magazines.filter(magazine => magazine.featured);
-  const allMagazines = magazines.filter(magazine => 
-    magazine.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    magazine.author.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    magazine.about.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const allMagazines = magazines.filter(magazine => {
+    const matchesSearch = magazine.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      magazine.author.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      magazine.about.toLowerCase().includes(searchQuery.toLowerCase())
+
+    const matchesCategory = selectedCategory === "All" || magazine.category === selectedCategory;
+    return matchesSearch && matchesCategory;
+  });
+  const categories = ["All", "Art", "Culture", "Photography", "Thoughts"];
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
@@ -78,7 +82,7 @@ const Index = () => {
       </section>
 
       {/* Featured Section */}
-      {featuredMagazines.length > 0 && (
+      {featuredMagazines.length > 0 && !searchQuery && selectedCategory === "ALL" && (
         <section className="py-8 px-4">
           <div className="max-w-7xl mx-auto">
             <h2 className="text-3xl font-bold text-center mb-12 animate-fade-in dark:text-white">
@@ -86,9 +90,9 @@ const Index = () => {
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {featuredMagazines.map((magazine, index) => (
-                <MagazineCard 
-                  key={magazine.id} 
-                  magazine={magazine} 
+                <MagazineCard
+                  key={magazine.id}
+                  magazine={magazine}
                   index={index}
                 />
               ))}
@@ -101,18 +105,17 @@ const Index = () => {
       <section className="py-8 px-4">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-wrap justify-center gap-4 mb-12">
-            <Button variant="outline" size="sm" className="rounded-full">
-              ALL
-            </Button>
-            <Button variant="outline" size="sm" className="rounded-full">
-              ART
-            </Button>
-            <Button variant="outline" size="sm" className="rounded-full">
-              CULTURE
-            </Button>
-            <Button variant="outline" size="sm" className="rounded-full">
-              PHOTOGRAPHY
-            </Button>
+            {categories.map((category) => (
+              <Button
+                key={category}
+                variant={selectedCategory === category ? "default" : "outline"}
+                size="sm"
+                className="rounded-full"
+                onClick={() => setSelectedCategory(category)}
+              >
+                {category}
+              </Button>
+            ))}
           </div>
         </div>
       </section>
@@ -121,17 +124,24 @@ const Index = () => {
       <section className="py-8 px-4">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-3xl font-bold text-center mb-12 animate-fade-in dark:text-white">
-            ALL MAGAZINES
+            {searchQuery ? `SEARCH RESULTS` : selectedCategory === "ALL" ? "ALL MAGAZINES" : selectedCategory}
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {allMagazines.map((magazine, index) => (
-              <MagazineCard 
-                key={magazine.id} 
-                magazine={magazine} 
+              <MagazineCard
+                key={magazine.id}
+                magazine={magazine}
                 index={index}
               />
             ))}
           </div>
+          {allMagazines.length === 0 && (
+            <div className="text-center py-12">
+              <p className="text-gray-500 dark:text-gray-400 text-lg">
+                No magazines found matching your criteria.
+              </p>
+            </div>
+          )}
         </div>
       </section>
 
@@ -141,9 +151,9 @@ const Index = () => {
           <p className="text-gray-600">© {new Date().getFullYear()} Conscience Magazine. All rights reserved.</p>
           <div className="text-sm text-gray-500">
             <span>Created by </span>
-            <a 
-              href="https://originalvondo.github.io" 
-              target="_blank" 
+            <a
+              href="https://originalvondo.github.io"
+              target="_blank"
               rel="noopener noreferrer"
               className="text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-300 transition-colors font-medium"
             >
