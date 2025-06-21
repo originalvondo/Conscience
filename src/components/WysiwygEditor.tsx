@@ -135,13 +135,11 @@ const WysiwygEditor = ({ value, onChange, className, isExcerpt = false }: Wysiwy
   const handleImageTextInsert = () => {
     if (!imageTextUrl || !imageTextContent) return;
 
-    const textHtml = `<div class="flex flex-col md:flex-row gap-6 mb-8">
-  <img src="${imageTextUrl}" alt="${imageTextAlt}" class="w-full md:w-1/2 rounded-lg shadow-md" />
-  <div class="flex-1">
-    <p>${imageTextContent}</p>
-  </div>
-</div>
-
+    const textHtml = 
+    `<div class="flex flex-col md:flex-row gap-6 mb-8">
+      <img src="${imageTextUrl}" alt="${imageTextAlt}" class="rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 md:w-1/2 mb-2 max-w-sm md:order-1 md:mr-auto" />
+      <p class="flex-1 md:order-1 md:self-center">${imageTextContent}</p>
+    </div>
 `;
     insertAtCursor(textHtml);
 
@@ -155,10 +153,8 @@ const WysiwygEditor = ({ value, onChange, className, isExcerpt = false }: Wysiwy
     if (!textImageUrl || !textImageContent) return;
 
     const textHtml = `<div class="flex flex-col md:flex-row gap-6 mb-8">
-  <div class="flex-1">
-    <p>${textImageContent}</p>
-  </div>
-  <img src="${textImageUrl}" alt="${textImageAlt}" class="w-full md:w-1/2 rounded-lg shadow-md" />
+    <p class="flex-1 md:order-1 md:self-center>${textImageContent}</p>
+  <img src="${textImageUrl}" alt="${textImageAlt}" class="rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 md:w-1/2 mb-2 max-w-sm md:order-2 md:ml-auto" />
 </div>
 
 `;
