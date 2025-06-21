@@ -7,6 +7,8 @@ import MagazineCard from "@/components/MagazineCard";
 import ThemeToggle from "@/components/ThemeToggle";
 import Header from "@/components/Header";
 import Footer from "@/components/footer";
+import SpaceScene from "@/components/SpaceScene";
+import Logo3D from "@/components/Logo3D";
 
 const Index = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -14,7 +16,15 @@ const Index = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("ALL");
   const [magazines, setMagazines] = useState([]);
+  const [scrollY, setScrollY] = useState(0);
 
+  // Track scroll position for 3D scene
+  useEffect(() => {
+    const handleScroll = () => setScrollY(window.scrollY);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+  
   useEffect(() => {
     const apiUrl = `${__API_URL__}/magazines/`;
 
@@ -44,7 +54,7 @@ const Index = () => {
       magazine.author.toLowerCase().includes(searchQuery.toLowerCase()) ||
       magazine.about.toLowerCase().includes(searchQuery.toLowerCase())
 
-    const matchesCategory = selectedCategory === "All" || magazine.category === selectedCategory;
+    const matchesCategory = selectedCategory === "ALL" || magazine.category === selectedCategory;
     return matchesSearch && matchesCategory;
   });
   const categories = ["All", "Art", "Culture", "Photography", "Thoughts"];
@@ -54,13 +64,19 @@ const Index = () => {
       {/* Header */}
       <Header currentPage="" />
 
-      {/* Hero Section */}
-      <section className="bg-white dark:bg-gray-800 py-16 px-4">
-        <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-6xl md:text-8xl font-bold tracking-tight mb-8 animate-fade-in dark:text-white">
+      {/* Hero Section with 3D Background */}
+      <section className="relative bg-white dark:bg-gray-800 py-16 px-4 overflow-hidden">
+        {/* 3D Space Scene Background */}
+        <div className="absolute inset-0 z-0">
+          <SpaceScene scrollY={scrollY}/>
+        </div>
+        
+        {/* Hero Content */}
+        <div className="relative z-10 max-w-4xl mx-auto text-center">
+          <h1 className="text-6xl md:text-8xl font-bold tracking-tight mb-8 animate-fade-in dark:text-white text-gray-900">
             CONSCIENCE
           </h1>
-          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto animate-fade-in" style={{ animationDelay: '0.2s' }}>
+          <p className="text-lg text-gray-700 dark:text-gray-300 max-w-2xl mx-auto animate-fade-in" style={{ animationDelay: '0.2s' }}>
             A different perspective.
           </p>
         </div>

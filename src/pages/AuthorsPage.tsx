@@ -7,6 +7,8 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Search, BookOpen } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/footer"
+import Logo3D from "@/components/Logo3D";
+import SpaceScene from "@/components/SpaceScene";
 
 const AuthorsPage = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -16,6 +18,14 @@ const AuthorsPage = () => {
     const [authorsInfo, setAuthorsInfo] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [scrollY, setScrollY] = useState(0);
+
+    // Track scroll position for 3D scene
+    useEffect(() => {
+        const handleScroll = () => setScrollY(window.scrollY);
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
 
     useEffect(() => {
         const fetchAuthorsInfo = async () => {
@@ -36,7 +46,7 @@ const AuthorsPage = () => {
                     acc[author.username] = {
                         name: author.name,
                         username: author.username, // Using username as the unique key
-                        image: author.image, 
+                        image: author.image,
                         articles: author.articles, // Articles from backend
                         categories: new Set(author.categories), // Categories from backend
                         bio: author.bio || "A passionate writer and creative storyteller.",
@@ -106,9 +116,15 @@ const AuthorsPage = () => {
             <Header currentPage="authors" />
 
             {/* Page Header */}
-            <section className="bg-white dark:bg-gray-800 py-16 px-4">
-                <div className="max-w-4xl mx-auto text-center">
-                    <h1 className="text-6xl md:text-8xl font-bold tracking-tight mb-8 animate-fade-in dark:text-white">
+            {/* Page Header with 3D Background */}
+            <section className="relative bg-white dark:bg-gray-800 py-16 px-4 overflow-hidden">
+                {/* 3D Space Scene Background */}
+                <div className="absolute inset-0 z-0">
+                    <SpaceScene scrollY={scrollY} />
+                </div>
+
+                <div className="relative z-10 max-w-4xl mx-auto text-center">
+                    <h1 className="text-6xl md:text-8xl font-bold tracking-tight mb-8 animate-fade-in dark:text-white text-gray-900">
                         AUTHORS
                     </h1>
                     <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto animate-fade-in" style={{ animationDelay: '0.2s' }}>
