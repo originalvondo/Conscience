@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import ThemeToggle from "@/components/ThemeToggle";
+import Logo3D from "@/components/Logo3D";
+
 interface HeaderProps {
   currentPage?: string;
 }
@@ -20,7 +22,8 @@ const Header = ({ currentPage }: HeaderProps) => {
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
             <a href={`${__BASE_URL__}/`} className="text-2xl font-bold tracking-tight dark:text-white">
-              CONSCIENCE
+              {/* CONSCIENCE */}
+              <Logo3D />
             </a>
 
             {/* Desktop Navigation */}
