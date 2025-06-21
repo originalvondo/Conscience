@@ -278,6 +278,7 @@ const CreateMagazine = () => {
                     value={excerpt}
                     onChange={setExcerpt}
                     className="mt-1"
+                    isExcerpt={true}
                   />
                 </div>
 
@@ -350,6 +351,7 @@ const CreateMagazine = () => {
                     value={content}
                     onChange={setContent}
                     className="mt-1"
+                    isExcerpt={false}
                   />
                 </div>
               </CardContent>
